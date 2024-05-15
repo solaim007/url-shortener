@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL SHORTENER</title>
+    <style>
+        header {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: xx-large;
+            color: #023047;
+            font-weight: bolder;
+            transition: 1s linear;
+        }
+
+
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #8ecae6;
+            color: rgb(211, 211, 216);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+        }
+
+        body h1 {
+            font-size: 2rem;
+            opacity: 1;
+            font-weight: bolder;
+            color: #ffb703;
+
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 70vw;
+            height: 90vh;
+            background-color: #2d3b55;
+            margin: 10px;
+            padding: 10px;
+            font-weight: bolder;
+            overflow: auto;
+            box-shadow: 10px 5px 5px #1a2230;
+            transition: 0.5s;
+            gap: 10px;
+        }
+
+        .container:hover {
+            box-shadow: 20px 10px 10px #1a2230;
+            background-color: rgba(45, 59, 85, 0.9);
+        }
+
+        .urlfield form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .urlfield input {
+            border-radius: 30px;
+            height: 30px;
+            width: 20rem;
+            font-size: 1rem;
+            border: 2px solid rgb(2, 2, 105);
+            padding: 5px 5px 5px 30px;
+            background-color: rgba(142, 202, 230, 0.5);
+            color: rgb(211, 211, 216);
+            transition: 0.5s;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-style: none;
+
+        }
+
+        .urlfield input:hover {
+            background-color: rgba(83, 107, 153, 0.8);
+        }
+
+        .urlfield ::placeholder {
+            color: rgb(211, 211, 216);
+        }
+
+        .urlfield button {
+            border-radius: 10px;
+            font-size: 1rem;
+            height: 30px;
+            width: 20rem;
+            margin: 10px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-radius: 30px;
+            background-color: #ffb703;
+            color: #023047;
+            cursor: pointer;
+            border-style: none;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            
+        }
+        .urlfield button:hover{
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid rgb(2, 2, 105);
+            color: #bfdcf8;
+
+        }
+
+        table td {
+            background-color: rgba(61, 81, 118, 0.3);
+            text-overflow: ellipsis;
+        }
+
+        table th {
+            font-size: larger;
+            background-color: #6780ae;
+            color: #0c3347;
+        }
+
+
+        .copy-btn-1 {
+            padding: 5px 10px;
+            color: #023047;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px;
+            background-color: #ffb703;
+        }
+        #copyURL{
+            background-color: rgba(142, 202, 230,0.8);
+            color: #023047;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+
+        .URL {
+            margin-top: 10rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            align-items: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .URLFONT{
+            color: #ffb703;
+            font-size: 1.5rem;
+        }
+
+        @media only screen and (max-width: 750px) {
+
+            /* Adjustments for smaller screens */
+            .container {
+                width: 80vw;
+                overflow: auto;
+            }
+        .URL{
+            display: flex;
+            flex-direction: column;
+        }
+
+
+            .urlfield input{
+                width: 18rem;
+                height: 30px;
+            }
+            .urlfield button{
+                width: 18rem;
+                height: 30px;
+            }
+
+            
+
+            table {
+
+                font-size: x-small;
+            }
+
+            body h1 {
+                font-size: 1.5rem;
+
+            }
+        }
+
+        @media only screen and (max-width: 450px) {
+
+            .container {
+                width: 80vw;
+                overflow: auto;
+            }
+            /* Adjustments for smaller screens */
+            .urlfield input{
+                width: 14rem;
+                height: 30px;
+            }
+            .urlfield button{
+                width: 14rem;
+                height: 30px;
+            }
+
+            table {
+
+                font-size:xx-small;
+            }
+
+            body h1 {
+                font-size: 1rem;
+
+            }
+            header{
+                font-size: medium;
+            }
+        }
+    </style>
+</head>
+<header>URL Shortener!</header>
+
+<body>
+    <div class="container">
+
+        <div>
+            <% if (locals.id) { %>
+                <div class="URL">
+                    <div class="URLFONT">URL Generated:</div>
+                    <div id="copyURL">http://localhost:8080/<%= id %>
+                    </div>
+
+                    <button style="font-weight: bold;" id="copybtn" class="copy-btn-1"
+                        onclick="copyURL()">Copy URL</button>
+
+                </div>
+
+                <% } %>
+        </div>
+        <div>
+            <h1>Short Your URL Here!</h1>
+        </div>
+        <div class="urlfield">
+            <form method="POST" action="/url">
+
+                <input type="text" name="url" placeholder="Paste your URL">
+
+
+                <button type="submit">Generate</button>
+
+            </form>
+        </div>
+        <div class="tableDiv" style="overflow-x: auto;">
+            <% if (locals.urls) { %>
+                <table>
+                    <thead>
+                        <th>S.no</th>
+                        <th>Short Id</th>
+                        <!-- <th>Redirect To</th> -->
+                        <th>Redirect URL</th>
+                        <th>Clicks</th>
+                    </thead>
+                    <tbody>
+                        <% urls.forEach((url,index)=> { %>
+                            <tr>
+
+                                <td>
+                                    <%= index +1 %>
+                                        <!-- <!-- </td> -->
+                                <td>
+                                    <%= url.shortId %>
+                                </td>
+                                <!-- <td >
+                                    <!-- <%= url.redirectURL %> -->
+                                <!-- </td>  -->
+                                <td>
+
+                                    <div id="copyURL">http://localhost:8080/<%= url.shortId %>
+                                    </div>
+
+
+                                </td>
+
+
+                                <td>
+                                    <%= url.visitHistory.length %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+        </div>
+    </div>
+    <script>
+        function copyURL() {
+            var text = document.getElementById("copyURL").innerText;
+
+            navigator.clipboard.writeText(text)
+                .then(function () {
+                    console.log('Text copied to clipboard');
+                    document.getElementById("copybtn").innerHTML = "copied";
+                    document.getElementById("copybtn").style.backgroundColor="#c18a01";
+                    
+                })
+                .catch(function (err) {
+                    console.error('Could not copy text: ', err);
+                    alert('Could not copy text');
+                });
+        }
+    </script>
+</body>
+
+</html>
